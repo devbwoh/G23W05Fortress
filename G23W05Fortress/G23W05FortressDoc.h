@@ -11,10 +11,12 @@ class CG23W05FortressDoc : public CDocument
 protected:
 	int Angle = 70;
 	int Power = 80;
+	int Target = 500;
 
 public:
 	int GetAngle() { return Angle; }
 	int GetPower() { return Power; }
+	int GetTarget() { return Target; }
 
 protected: // serialization에서만 만들어집니다.
 	CG23W05FortressDoc() noexcept;
@@ -53,4 +55,6 @@ protected:
 	// 검색 처리기에 대한 검색 콘텐츠를 설정하는 도우미 함수
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+public:
+	afx_msg void OnTarget();
 };

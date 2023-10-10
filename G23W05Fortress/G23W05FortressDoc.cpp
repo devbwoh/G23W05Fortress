@@ -23,6 +23,7 @@
 IMPLEMENT_DYNCREATE(CG23W05FortressDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CG23W05FortressDoc, CDocument)
+	ON_COMMAND(IDM_TARGET, &CG23W05FortressDoc::OnTarget)
 END_MESSAGE_MAP()
 
 
@@ -47,6 +48,7 @@ BOOL CG23W05FortressDoc::OnNewDocument()
 	// SDI 문서는 이 문서를 다시 사용합니다.
 	Angle = 70;
 	Power = 80;
+	Target = 500;
 
 	return TRUE;
 }
@@ -138,3 +140,11 @@ void CG23W05FortressDoc::Dump(CDumpContext& dc) const
 
 
 // CG23W05FortressDoc 명령
+
+
+void CG23W05FortressDoc::OnTarget()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	Target = rand() % 1500 + 100;
+	UpdateAllViews(NULL);
+}

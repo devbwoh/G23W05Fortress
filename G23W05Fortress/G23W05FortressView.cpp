@@ -53,6 +53,7 @@ BOOL CG23W05FortressView::PreCreateWindow(CREATESTRUCT& cs)
 // CG23W05FortressView 그리기
 
 #define GROUND	50
+#define TARGET_SIZE	100
 
 void CG23W05FortressView::OnDraw(CDC* pDC)
 {
@@ -121,6 +122,11 @@ void CG23W05FortressView::DrawBackground(CDC* pDC)
 	CString str;
 	str.Format(L"Angle = %d, Power = %d", pDoc->GetAngle(), pDoc->GetPower());
 	pDC->TextOutW(10, 10, str);
+
+	// Target
+	int target = pDoc->GetTarget();
+	pDC->Rectangle(target - TARGET_SIZE / 2, rect.bottom - GROUND - TARGET_SIZE,
+		target + TARGET_SIZE / 2, rect.bottom - GROUND);
 }
 
 // CG23W05FortressView 인쇄
