@@ -44,6 +44,7 @@ public:
 	afx_msg void OnFire();
 	void CalculateCoordinate(int angle, int power, int t, int* x, int* y);
 	void DrawBackground(CDC* pDC);
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
 #ifndef _DEBUG  // G23W05FortressView.cpp의 디버그 버전

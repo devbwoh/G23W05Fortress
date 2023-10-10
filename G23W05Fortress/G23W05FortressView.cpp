@@ -28,6 +28,7 @@ BEGIN_MESSAGE_MAP(CG23W05FortressView, CView)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 	ON_COMMAND(IDM_FIRE, &CG23W05FortressView::OnFire)
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 // CG23W05FortressView 생성/소멸
@@ -171,3 +172,24 @@ CG23W05FortressDoc* CG23W05FortressView::GetDocument() const // 디버그되지 
 
 // CG23W05FortressView 메시지 처리기
 
+
+
+void CG23W05FortressView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CG23W05FortressDoc* pDoc = GetDocument();
+
+	//MessageBox(L"키가 눌렸습니다");
+	switch (nChar)
+	{
+	case VK_UP: pDoc->SetAngle(pDoc->GetAngle() + 1); break;
+	case VK_DOWN: pDoc->SetAngle(pDoc->GetAngle() - 1); break;
+	case VK_LEFT: pDoc->SetPower(pDoc->GetPower() - 1); break;
+	case VK_RIGHT: pDoc->SetPower(pDoc->GetPower() + 1); break;
+	default:
+		break;
+	}
+
+	Invalidate();
+	CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}

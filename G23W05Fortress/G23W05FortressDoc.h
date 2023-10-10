@@ -18,6 +18,20 @@ public:
 	int GetPower() { return Power; }
 	int GetTarget() { return Target; }
 
+	void SetAngle(int a) {
+		if (a < 90 && a > 0) {
+			Angle = a;
+			SetModifiedFlag();
+		}
+	}
+
+	void SetPower(int a) {
+		if (a < 150 && a > 0) {
+			Power = a;
+			SetModifiedFlag();
+		}
+	}
+
 protected: // serialization에서만 만들어집니다.
 	CG23W05FortressDoc() noexcept;
 	DECLARE_DYNCREATE(CG23W05FortressDoc)
