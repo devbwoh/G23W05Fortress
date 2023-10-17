@@ -53,9 +53,6 @@ BOOL CG23W05FortressView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CG23W05FortressView 그리기
 
-#define GROUND	50
-#define TARGET_SIZE	100
-
 void CG23W05FortressView::OnDraw(CDC* pDC)
 {
 	CG23W05FortressDoc* pDoc = GetDocument();
@@ -76,13 +73,12 @@ void CG23W05FortressView::OnFire()
 
 	int a = pDoc->GetAngle();
 	int p = pDoc->GetPower();
+	int target = pDoc->GetTarget();
 
 	CRect rect;
 	GetClientRect(&rect);
 
 	CClientDC dc(this);
-
-	//dc.Ellipse(100, 100, 300, 300);
 
 	for (int t = 0; t < 100; t++) {
 		CalculateCoordinate(a, p, t, &x, &y);
@@ -90,7 +86,14 @@ void CG23W05FortressView::OnFire()
 		if (y > rect.bottom - GROUND)
 			break;
 
-		dc.Ellipse(x - 30, y - 30, x + 30, y + 30);
+		dc.Ellipse(x - BOMB_RADIUS, y - BOMB_RADIUS, x + BOMB_RADIUS, y + BOMB_RADIUS);
+
+		if (abs(x - target) < BOMB_RADIUS + TARGET_SIZE / 2
+			&& y > rect.bottom - GROUND - TARGET_SIZE - BOMB_RADIUS) {
+			MessageBox(L"명중");
+			break;
+		}
+
 		Sleep(50);
 
 		dc.FillSolidRect(rect, RGB(255, 255, 255));

@@ -4,6 +4,9 @@
 
 #pragma once
 
+#define GROUND		50
+#define BOMB_RADIUS	30
+#define TARGET_SIZE	100
 
 class CG23W05FortressView : public CView
 {
