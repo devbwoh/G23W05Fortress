@@ -211,6 +211,8 @@
     <None Include="res\G23W05Fortress.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\bomb.bmp" />
+    <Image Include="D:\_학교\강의\2023년 2학기\GUI프로그래밍\bomb.png" />
     <Image Include="res\G23W05Fortress.ico" />
     <Image Include="res\G23W05FortressDoc.ico" />
     <Image Include="res\Toolbar.bmp" />

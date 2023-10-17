@@ -80,13 +80,29 @@ void CG23W05FortressView::OnFire()
 
 	CClientDC dc(this);
 
+	CDC bmpDC;
+	bmpDC.CreateCompatibleDC(&dc);
+
+	CBitmap bmp;
+	bmp.LoadBitmapW(IDB_BOMB);
+
+	BITMAP info;
+	bmp.GetBitmap(&info);
+
+	CBitmap* old = bmpDC.SelectObject(&bmp);
+
 	for (int t = 0; t < 100; t++) {
 		CalculateCoordinate(a, p, t, &x, &y);
 		y = rect.bottom - y - GROUND;
 		if (y > rect.bottom - GROUND)
 			break;
 
-		dc.Ellipse(x - BOMB_RADIUS, y - BOMB_RADIUS, x + BOMB_RADIUS, y + BOMB_RADIUS);
+		//dc.Ellipse(x - BOMB_RADIUS, y - BOMB_RADIUS, x + BOMB_RADIUS, y + BOMB_RADIUS);
+		dc.BitBlt(x - info.bmWidth / 2, y - info.bmHeight,
+			info.bmWidth, info.bmHeight,
+			&bmpDC,
+			0, 0,
+			SRCCOPY);
 
 		if (abs(x - target) < BOMB_RADIUS + TARGET_SIZE / 2
 			&& y > rect.bottom - GROUND - TARGET_SIZE - BOMB_RADIUS) {
@@ -99,6 +115,10 @@ void CG23W05FortressView::OnFire()
 		dc.FillSolidRect(rect, RGB(255, 255, 255));
 		DrawBackground(&dc);
 	}
+
+	bmpDC.SelectObject(old);
+
+	Invalidate();
 }
 
 
